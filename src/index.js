@@ -1,0 +1,1 @@
+window.location.href = './components/view_product/view_product.html';
