@@ -21,7 +21,7 @@ function createWindow() {
     mainWindow.setMenu(null);
   }
 
-  mainWindow.loadFile('./src/index.html')
+  mainWindow.loadFile('./src/index.html');
 }
 
 app.whenReady().then(() => {
@@ -36,11 +36,17 @@ app.whenReady().then(() => {
 
   createWindow();
   app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 
 })
 
 app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin') app.quit();
+});
+
+ipcMain.on('base', (event, query) => {
+  database.query(query).then(res => {
+    event.reply('response', ['ok', res.rows])
+  }).catch(e => event.reply('response', ['error', e]));
 });

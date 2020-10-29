@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron');
 const view_product = require('./components/view_product/view_product');
 
 window.onload = () => {
@@ -6,15 +7,16 @@ window.onload = () => {
 
 function goProductView() {
 
-    fetch('components/view_product/view_product.html').then(function (response) {
+    fetch('components/view_product/view_product.html').then((response) => {
         return response.text();
-    }).then(function (html) {
+    }).then((html) => {
         document.getElementById('app').innerHTML = html;
         let product = {
-            name: "el pepe"
+            name: "el pepe",
+            image: ""
         }
         view_product.showProduct(product)
-    }).catch(function (err) {
+    }).catch((err) => {
         console.log(err);
     });
 }
@@ -22,13 +24,24 @@ function goProductView() {
 function goProductScan() {
 
 
-    fetch('components/scan_product/scan_product.html').then(function (response) {
-        return response.text();
-    }).then(function (html) {
-        document.getElementById('app').innerHTML = html;
-        // view_product.constructor("el pepe")
-    }).catch(function (err) {
-        console.log(err);
+    let query = "select * from productos limit 1";
+
+    ipcRenderer.send('base', query);
+
+    ipcRenderer.once("response", (event, response) => {
+
+        console.log("vuelve")
+
+        if(response[0] == 'ok'){
+
+            console.log(response[1]);
+
+        }else{
+
+            console.log(response[1]);
+
+        }
+
     });
 
 }
