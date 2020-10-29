@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const database = require('./database').database;
 
 if (process.env.NODE_ENV !== 'production') {
   require('electron-reload')(__dirname, {
@@ -15,18 +16,29 @@ function createWindow() {
   });
 
   mainWindow.maximize();
-  mainWindow.setMenu(null);
+
+  if (process.env.NODE_ENV == 'production') {
+    mainWindow.setMenu(null);
+  }
 
   mainWindow.loadFile('./src/index.html')
-
 }
 
 app.whenReady().then(() => {
-  createWindow();
 
+  database.connect(error => {
+    if (error) {
+      console.error('Error al conectar Base de datos.', error.stack);
+    } else {
+      console.log('Base de datos conectada.');
+    }
+  });
+
+  createWindow();
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   });
+
 })
 
 app.on('window-all-closed', function () {
