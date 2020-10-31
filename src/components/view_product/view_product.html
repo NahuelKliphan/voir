@@ -1,10 +1,25 @@
-<div style="margin: 1rem;padding:1rem;">
-    <label for="">Id</label> <input id="valueId" readonly type="text"> <br>
-    <label for="">Codigo</label> <input id="valueCodigo" readonly type="text"><br>
-    <label for="">Nombre</label> <input id="valueNombre" readonly type="text"><br>
-    <label for="">Precio</label> <input id="valuePrecio" readonly type="text"><br>
-    <label for="">Categoria</label> <input id="valueCategoria" readonly type="text"><br>
-    <label for="">Descripción</label> <textarea id="valueDescripcion" cols="30" rows="3"></textarea><br>
-    <label for="">Foto</label> <img width="200px" id="valueFoto" src="" alt=""> <br>
-    <button onclick="goProductScan();">Volver</button>
-</div>
+<main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+        <div class="row wow fadeIn">
+            <div class="col-md-6 mb-4">
+                <img id="valueFoto" class="rounded  img-fluid" alt="Foto">
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="p-4">
+                    <p id="valueNombre" class="lead font-weight-bold"></p>
+                    <div class="mb-3">
+                        <a href="">
+                            <span id="valueCategoria" class="badge blue mr-1"></span>
+                        </a>
+                    </div>
+                    <p class="lead">
+                        <span id="valuePrecio"></span>
+                    </p>
+                    <p class="lead font-weight-bold">Descripción</p>
+                    <p id="valueDescripcion"></p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</main>

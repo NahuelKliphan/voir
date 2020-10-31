@@ -3,9 +3,9 @@ var unProducto = {};
 
 const scanProduct = () => {
 
-    let codigo = document.getElementById("inputCodigoSearch").value;
+    //let codigo = document.getElementById("inputCodigoSearch").value;
 
-    //let codigo = "7795513052396";
+    let codigo = "7795513052396";
 
     let query = `select id as id,
     codigo as codigo, 

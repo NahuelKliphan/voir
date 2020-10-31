@@ -5,13 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voir</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <link href="./css/mdb.min.css" rel="stylesheet">
+  <link href="./css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
   <!-- <button onclick="goProductView();">Producto detalle</button>
   <button onclick="goProductScan();">Producto Scan</button> -->
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect">
+        <strong class="blue-text">Casanely</strong>
+      </a>
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> </li>
+          <li class="nav-item"> </li>
+          <li class="nav-item"> </li>
+          <li class="nav-item"></li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+
+          <li class="nav-item">
+            <a onclick="goProductScan();" class="nav-link border border-light rounded waves-effect">
+              <i class="fas fa-chevron-left"></i> Volver
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+
   <div id="app"></div>
+
+  <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="./js/popper.min.js"></script>
+  <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/mdb.min.js"></script>
   <script src="./index.js"></script>
 </body>
 

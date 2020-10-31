@@ -23,6 +23,7 @@ const goProductScan = () => {
         return response.text();
     }).then((html) => {
         document.getElementById('app').innerHTML = html;
+        //scan_product.scanProduct();
     }).catch((err) => {
         console.log(err);
     });
