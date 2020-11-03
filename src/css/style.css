@@ -1,0 +1,13 @@
+.scroll-hidden {
+    overflow-y: hidden;
+}
+
+.padding-5 {
+    padding-right: 5rem;
+    padding-left: 5rem;
+}
+
+.input-hidden {
+    position: absolute;
+    left: -30000px;
+}

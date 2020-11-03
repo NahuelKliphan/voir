@@ -1,11 +1,9 @@
 const { ipcRenderer } = require('electron');
-var unProducto = {};
+var aProduct = {};
 
 const scanProduct = () => {
 
-    //let codigo = document.getElementById("inputCodigoSearch").value;
-
-    let codigo = "7795513052396";
+    let codigo = document.getElementById("inputCodigoSearch").value;
 
     let query = `select id as id,
     codigo as codigo, 
@@ -20,9 +18,10 @@ const scanProduct = () => {
     ipcRenderer.send('base', query);
     ipcRenderer.once("response", (event, response) => {
         if (response[0] == 'ok') {
-            unProducto = response[1][0];
-            if (unProducto) {
-                goProductView(unProducto);
+            aProduct = response[1][0];
+            if (aProduct) {
+                document.getElementById("inputCodigoSearch").value = "";
+                goProductView(aProduct);
             }
         } else {
             console.log(response[1]);
@@ -40,4 +39,4 @@ const searchProduct = () => {
 
 exports.scanProduct = scanProduct;
 exports.searchProduct = searchProduct;
-exports.unProducto = unProducto;
+exports.aProduct = aProduct;
