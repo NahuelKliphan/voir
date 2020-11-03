@@ -50,3 +50,8 @@ ipcMain.on('base', (event, query) => {
     event.reply('response', ['ok', res.rows])
   }).catch(e => event.reply('response', ['error', e]));
 });
+
+ipcMain.on('exit', (event) => {
+  database.end();
+  app.quit();
+});

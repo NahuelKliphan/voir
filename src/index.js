@@ -1,5 +1,6 @@
 const view_product = require('./components/view_product/view_product');
 const scan_product = require('./components/scan_product/scan_product');
+const { ipcRenderer } = require('electron');
 
 const timeWaitView = 10000;
 var instanceSetTimeOut;
@@ -55,5 +56,9 @@ const loadScreen = (load) => {
         loader.style.display = "none";
         app.style.display = "block";
     }, 10000)
+}
+
+const exitApp = () => {
+    ipcRenderer.send('exit');
 }
 
