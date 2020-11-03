@@ -11,3 +11,7 @@
     position: absolute;
     left: -30000px;
 }
+
+.hidden {
+    display: none;
+}

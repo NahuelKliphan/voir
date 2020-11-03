@@ -34,6 +34,8 @@ const goProductScan = () => {
         document.getElementById('app').innerHTML = html;
         clearTimeout(instanceSetTimeOut);
         document.getElementById('inputCodigoSearch').focus();
+        document.getElementById("btnPowerOff").classList.remove("hidden");
+        document.getElementById("btnBackHome").classList.add("hidden");
     }).catch((err) => {
         console.log(err);
     });

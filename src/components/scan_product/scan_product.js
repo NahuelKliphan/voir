@@ -21,6 +21,8 @@ const scanProduct = () => {
             aProduct = response[1][0];
             if (aProduct) {
                 document.getElementById("inputCodigoSearch").value = "";
+                document.getElementById("btnPowerOff").classList.add("hidden");
+                document.getElementById("btnBackHome").classList.remove("hidden");
                 goProductView(aProduct);
             }
         } else {
