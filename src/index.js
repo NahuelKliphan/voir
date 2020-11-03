@@ -40,3 +40,20 @@ const goProductScan = () => {
         console.log(err);
     });
 }
+
+const loadScreen = (load) => {
+    let loader = document.getElementById("loader");
+    let app = document.getElementById("app");
+    if (load) {
+        loader.style.display = "block";
+        app.style.display = "none";
+    } else {
+        loader.style.display = "none";
+        app.style.display = "block";
+    }
+    setTimeout(() => {
+        loader.style.display = "none";
+        app.style.display = "block";
+    }, 10000)
+}
+

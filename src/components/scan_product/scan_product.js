@@ -3,6 +3,7 @@ var aProduct = {};
 
 const scanProduct = () => {
 
+    loadScreen(true);
     let codigo = document.getElementById("inputCodigoSearch").value;
 
     let query = `select id as id,
@@ -28,7 +29,9 @@ const scanProduct = () => {
         } else {
             console.log(response[1]);
         }
+        loadScreen(false);
     });
+
 }
 
 const searchProduct = () => {
