@@ -2,10 +2,11 @@ const view_product = require('./components/view_product/view_product');
 const scan_product = require('./components/scan_product/scan_product');
 const { ipcRenderer } = require('electron');
 
-const timeWaitView = 10000;
+var timeWaitView = 10000;
 var instanceSetTimeOut;
 
 window.onload = () => {
+    getSettings();
     goProductScan();
 }
 
@@ -58,7 +59,21 @@ const loadScreen = (load) => {
     }, 10000)
 }
 
+const getSettings = () => {
+
+    let query = `select valor as valor
+    from variables v 
+    where v.nombre = 'Cantidad de segundos para ver producto';`;
+    ipcRenderer.send('base', query);
+    ipcRenderer.once("response", (event, response) => {
+        if (response[0] == 'ok') {
+            timeWaitView = Number(response[1][0].valor) * 1000;
+        } else {
+            console.log(response[1]);
+        }
+    });
+}
+
 const exitApp = () => {
     ipcRenderer.send('exit');
 }
-
