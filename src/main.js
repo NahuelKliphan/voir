@@ -19,6 +19,7 @@ function createWindow() {
 
   if (process.env.NODE_ENV == 'production') {
     mainWindow.setMenu(null);
+    mainWindow.setFullScreen(true);
   }
 
   mainWindow.loadFile('./src/index.html');
