@@ -2,6 +2,9 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const database = require('./database').database;
 const isDev = require('electron-is-dev');
+const { autoUpdater } = require("electron-updater");
+
+var mainWindow;
 
 if (isDev) {
   require('electron-reload')(__dirname, {
@@ -10,20 +13,22 @@ if (isDev) {
 }
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
     webPreferences: { nodeIntegration: true },
   });
 
+  mainWindow.loadFile('./src/index.html');
   mainWindow.maximize();
 
   if (!isDev) {
-    //mainWindow.setMenu(null);
-    //mainWindow.setFullScreen(true);
+    mainWindow.setMenu(null);
+    mainWindow.setFullScreen(true);
+    autoUpdater.checkForUpdatesAndNotify();
+  } else {
+    autoUpdater.checkForUpdates();
   }
-
-  mainWindow.loadFile('./src/index.html');
 }
 
 app.whenReady().then(() => {
@@ -56,4 +61,36 @@ ipcMain.on('base', (event, query) => {
 ipcMain.on('exit', (event) => {
   database.end();
   app.quit();
+});
+
+//Autoupdater
+
+const sendStatusToWindow = (text) => {
+  mainWindow.webContents.send('update', text);
+}
+
+const sendStatuspercentToWindow = (text) => {
+  mainWindow.webContents.send('percent', text);
+}
+
+autoUpdater.on('checking-for-update', () => {
+  //sendStatusToWindow('Buscando Actualizaciones');
+});
+autoUpdater.on('update-available', (info) => {
+  //sendStatusToWindow('Actualización disponible');
+});
+autoUpdater.on('update-not-available', (info) => {
+  //sendStatusToWindow('Actualización no disponible');
+});
+autoUpdater.on('error', (err) => {
+  //sendStatusToWindow('Error de Actualización ' + err);
+});
+autoUpdater.on('download-progress', (progressObj) => {
+  let log_message = 'Descargando ' + Number.parseFloat(progressObj.percent).toFixed(2) + '%';
+  //sendStatusToWindow(log_message);
+  //sendStatuspercentToWindow(progressObj.percent);
+});
+autoUpdater.on('update-downloaded', (info) => {
+  //sendStatusToWindow('Actualización descargada');
+  autoUpdater.quitAndInstall();
 });

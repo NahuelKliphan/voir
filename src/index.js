@@ -56,7 +56,7 @@ const loadScreen = (load) => {
     setTimeout(() => {
         loader.style.display = "none";
         app.style.display = "block";
-    }, 10000)
+    }, 10000);
 }
 
 const getSettings = () => {
@@ -79,6 +79,20 @@ const getSettings = () => {
         }
     });
 }
+
+ipcRenderer.on('update', function (event, text) {
+    let footer = document.getElementById("divFooter");
+    if (text == 'Actualización no disponible' || text == 'Actualización descargada') {
+        footer.style.display = "none";
+    } else {
+        footer.style.display = "block";
+    }
+    document.getElementById("statusUpdate").innerHTML = text;
+})
+ipcRenderer.on('percent', function (event, percent) {
+    document.getElementById("percentUpdate").innerHTML = `(${Number.parseFloat(percent).toFixed(2)}%)`;
+    document.getElementById("progressBar").style.width = ` ${percent}%`;
+});
 
 const exitApp = () => {
     ipcRenderer.send('exit');

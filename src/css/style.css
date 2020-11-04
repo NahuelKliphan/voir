@@ -27,3 +27,17 @@
 .name-tag {
     font-size: 2rem;
 }
+
+footer{
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    display: none;
+}
+
+.footer {
+    height: 5rem;
+    margin: auto;
+    width: 80rem;
+    text-align:center;
+}
