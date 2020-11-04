@@ -21,7 +21,7 @@ const goProductView = (aProduct) => {
         clearTimeout(instanceSetTimeOut);
         instanceSetTimeOut = setTimeout(() => {
             goProductScan();
-        }, timeWaitView)
+        }, timeWaitView);
 
     }).catch((err) => {
         console.log(err);
@@ -90,7 +90,6 @@ ipcRenderer.on('update', function (event, text) {
     document.getElementById("statusUpdate").innerHTML = text;
 })
 ipcRenderer.on('percent', function (event, percent) {
-    document.getElementById("percentUpdate").innerHTML = `(${Number.parseFloat(percent).toFixed(2)}%)`;
     document.getElementById("progressBar").style.width = ` ${percent}%`;
 });
 

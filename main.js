@@ -74,23 +74,23 @@ const sendStatuspercentToWindow = (text) => {
 }
 
 autoUpdater.on('checking-for-update', () => {
-  //sendStatusToWindow('Buscando Actualizaciones');
+  sendStatusToWindow('Buscando Actualizaciones');
 });
 autoUpdater.on('update-available', (info) => {
-  //sendStatusToWindow('Actualización disponible');
+  sendStatusToWindow('Actualización disponible');
 });
 autoUpdater.on('update-not-available', (info) => {
-  //sendStatusToWindow('Actualización no disponible');
+  sendStatusToWindow('Actualización no disponible');
 });
 autoUpdater.on('error', (err) => {
-  //sendStatusToWindow('Error de Actualización ' + err);
+  sendStatusToWindow('Error de Actualización ' + err);
 });
 autoUpdater.on('download-progress', (progressObj) => {
-  let log_message = 'Descargando ' + Number.parseFloat(progressObj.percent).toFixed(2) + '%';
-  //sendStatusToWindow(log_message);
-  //sendStatuspercentToWindow(progressObj.percent);
+  let log_message = 'Descargando (' + Number.parseFloat(progressObj.percent).toFixed(2) + '%)';
+  sendStatusToWindow(log_message);
+  sendStatuspercentToWindow(progressObj.percent);
 });
 autoUpdater.on('update-downloaded', (info) => {
-  //sendStatusToWindow('Actualización descargada');
+  sendStatusToWindow('Actualización descargada');
   autoUpdater.quitAndInstall();
 });
