@@ -61,13 +61,19 @@ const loadScreen = (load) => {
 
 const getSettings = () => {
 
-    let query = `select valor as valor
-    from variables v 
-    where v.nombre = 'Cantidad de segundos para ver producto';`;
+    let query = `select v.valor as valor,
+    ent.nombre as empresa
+    from variables v, entidades ent
+    where v.nombre = 'Cantidad de segundos para ver producto' and ent.id = 1;`;
     ipcRenderer.send('base', query);
     ipcRenderer.once("response", (event, response) => {
         if (response[0] == 'ok') {
-            timeWaitView = Number(response[1][0].valor) * 1000;
+            if (response[1][0].valor != "") {
+                timeWaitView = Number(response[1][0].valor) * 1000;
+            }
+            if (response[1][0].empresa != "") {
+                document.getElementById("valueNameEntity").innerHTML = response[1][0].empresa;
+            }
         } else {
             console.log(response[1]);
         }

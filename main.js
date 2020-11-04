@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const database = require('./database').database;
+const isDev = require('electron-is-dev');
 
-if (process.env.NODE_ENV !== 'production') {
+if (isDev) {
   require('electron-reload')(__dirname, {
     electron: path.join(__dirname, '../node_modules', '.bin', 'electron')
   });
@@ -17,9 +18,9 @@ function createWindow() {
 
   mainWindow.maximize();
 
-  if (process.env.NODE_ENV == 'production') {
-    mainWindow.setMenu(null);
-    mainWindow.setFullScreen(true);
+  if (!isDev) {
+    //mainWindow.setMenu(null);
+    //mainWindow.setFullScreen(true);
   }
 
   mainWindow.loadFile('./src/index.html');

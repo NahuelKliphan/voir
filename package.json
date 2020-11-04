@@ -2,19 +2,62 @@
   "name": "voir",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "./src/main.js",
+  "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --x64"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NahuelKliphan/voir"
+  },
   "author": "NahuelKliphan",
   "devDependencies": {
     "electron": "^10.1.5",
-    "@fortawesome/fontawesome-free": "^5.15.1",
-    "electron-reload": "^1.5.0"
+    "electron-reload": "^1.5.0",
+    "electron-builder": "^22.9.1"
   },
   "dependencies": {
-    "pg": "^8.4.2"
+    "pg": "^8.4.2",
+    "electron-is-dev": "^1.2.0",
+    "@fortawesome/fontawesome-free": "^5.15.1"
+  },
+  "build": {
+    "appId": "com.github.NahuelKliphan.voir",
+    "productName": "voir",
+    "directories": {
+      "output": "release/"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "NahuelKliphan",
+        "repo": "voir"
+      }
+    ],
+    "files": [
+      "*.js",
+      "src",
+      "node_modules"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "icon": "dist",
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "icon": "dist",
+      "target": [
+        "AppImage"
+      ]
+    }
   }
 }
