@@ -10,7 +10,6 @@ const scanProduct = () => {
     codigo as codigo, 
     nombre as nombre, 
     trunc(precio_venta,2) as precio,
-    descripcion as descripcion, 
     (select nombre from categorias cat where cat.id = p.id_categoria) as categoria, 
     foto as foto
     from productos p 
