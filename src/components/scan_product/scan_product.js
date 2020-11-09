@@ -24,6 +24,9 @@ const scanProduct = () => {
                 document.getElementById("btnPowerOff").classList.add("hidden");
                 document.getElementById("btnBackHome").classList.remove("hidden");
                 goProductView(aProduct);
+            } else {
+                loadScreen(false);
+                document.getElementById("inputCodigoSearch").select();
             }
         } else {
             console.log(response[1]);
