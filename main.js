@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const database = require('./database').database;
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require("electron-updater");
+const { Client } = require('pg');
+var database;
 
 var mainWindow;
 
@@ -12,7 +13,22 @@ if (isDev) {
   });
 }
 
-function createWindow() {
+const connectDatabase = () => {
+
+  database = new Client(readDatabase());
+
+  database.connect(error => {
+    if (error) {
+      console.error('Error al conectar Base de datos.', error.stack);
+      connectDatabase();
+    } else {
+      console.log('Base de datos conectada.');
+      mainWindow.webContents.send('base-connected');
+    }
+  });
+}
+
+const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
@@ -33,22 +49,16 @@ function createWindow() {
 
 app.whenReady().then(() => {
 
-  database.connect(error => {
-    if (error) {
-      console.error('Error al conectar Base de datos.', error.stack);
-    } else {
-      console.log('Base de datos conectada.');
-    }
-  });
-
   createWindow();
-  app.on('activate', function () {
+  connectDatabase();
+
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 
 })
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
@@ -93,4 +103,17 @@ autoUpdater.on('download-progress', (progressObj) => {
 autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Actualización descargada');
   autoUpdater.quitAndInstall();
+});
+
+function readDatabase() {
+  const fs = require("fs");
+  const ruta = app.getPath('userData');
+  let data = fs.readFileSync(ruta + '/base.txt').toString().split(';');
+  return JSON.parse(data[0]);
+}
+
+process.on('uncaughtException', (error) => {
+  if (error.code == "57P01") {
+    connectDatabase();
+  }
 });

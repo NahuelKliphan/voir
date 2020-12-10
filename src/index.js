@@ -80,7 +80,7 @@ const getSettings = () => {
     });
 }
 
-ipcRenderer.on('update', function (event, text) {
+ipcRenderer.on('update', (event, text) => {
     let footer = document.getElementById("divFooter");
     if (text == 'Actualización no disponible' || text == 'Actualización descargada') {
         footer.style.display = "none";
@@ -88,9 +88,14 @@ ipcRenderer.on('update', function (event, text) {
         footer.style.display = "block";
     }
     document.getElementById("statusUpdate").innerHTML = text;
-})
-ipcRenderer.on('percent', function (event, percent) {
+});
+
+ipcRenderer.on('percent', (event, percent) => {
     document.getElementById("progressBar").style.width = ` ${percent}%`;
+});
+
+ipcRenderer.on('base-connected', (event) => {
+    getSettings();
 });
 
 const exitApp = () => {
