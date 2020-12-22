@@ -43,7 +43,7 @@
     </div>
     <div class="padding-5">
       <div class="md-form input-group mb-3">
-        <input oninput="scan_product.searchProduct();" id="inputCodigoSearch" type="text" class="form-control"
+        <input oninput="scan_product.searchProduct();" onkeypress="scan_product.searchProductOnEnterKey(event)" id="inputCodigoSearch" type="text" class="form-control"
           placeholder="Codigo" aria-label="Codigo">
         <div class="input-group-append">
           <button onclick="scan_product.scanProduct();" class="btn btn-md btn-blue m-0 px-3" type="button"> <i

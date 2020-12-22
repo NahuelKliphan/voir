@@ -36,6 +36,12 @@ const scanProduct = () => {
 
 }
 
+const searchProductOnEnterKey = (event) => {
+
+    if (event.key === 'Enter' || event.keyCode === 13) {
+        scanProduct();
+    }
+}
 const searchProduct = () => {
 
     let codigo = document.getElementById("inputCodigoSearch").value;
@@ -46,4 +52,5 @@ const searchProduct = () => {
 
 exports.scanProduct = scanProduct;
 exports.searchProduct = searchProduct;
+exports.searchProductOnEnterKey = searchProductOnEnterKey;
 exports.aProduct = aProduct;

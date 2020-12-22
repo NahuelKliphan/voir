@@ -113,7 +113,5 @@ function readDatabase() {
 }
 
 process.on('uncaughtException', (error) => {
-  if (error.code == "57P01") {
-    connectDatabase();
-  }
+  connectDatabase();
 });
