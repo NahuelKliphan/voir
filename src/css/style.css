@@ -28,6 +28,10 @@
     font-size: 2rem;
 }
 
+.acount-tag {
+    font-size: 1.5rem;
+}
+
 footer{
     bottom: 0;
     position: fixed;

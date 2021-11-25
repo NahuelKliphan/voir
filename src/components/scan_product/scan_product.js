@@ -11,7 +11,8 @@ const scanProduct = () => {
     nombre as nombre, 
     trunc(precio_venta,2) as precio,
     (select nombre from categorias cat where cat.id = p.id_categoria) as categoria, 
-    foto as foto
+    foto as foto,
+    cantidad as cantidad
     from productos p 
     where p.codigo = '${codigo}';`;
 
